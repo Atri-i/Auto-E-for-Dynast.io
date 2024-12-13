@@ -1,9 +1,9 @@
 // ==UserScript==
-// @name         v.0.1 by candy_soprano
+// @name         v1 Dynast.io Atri_i
 // @namespace    http://violentmonkey.github.io/
-// @version      0.1
+// @version      1
 // @description  i love Poliny
-// @author       ds:candy_soprano
+// @author       ds:atri_i
 // @match        *://*/*
 // @grant        none
 // ==/UserScript==
