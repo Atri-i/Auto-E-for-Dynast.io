@@ -1,0 +1,164 @@
+// ==UserScript==
+// @name         v.0.1 by candy_soprano
+// @namespace    http://violentmonkey.github.io/
+// @version      0.1
+// @description  i love Poliny
+// @author       ds:candy_soprano
+// @match        *://*/*
+// @grant        none
+// ==/UserScript==
+
+(function() {
+    'use strict';
+
+    // Define the list of authorized tokens
+    const authorizedTokens = ['kaprizz1', 'kaprizz2', 'kaprizz3'];
+
+    // Define the function to check if the user is authorized
+    function isAuthorized(token) {
+        return authorizedTokens.includes(token);
+    }
+
+    // Define the function to obfuscate the script
+    function obfuscate(code) {
+        // Replace the function and variable names with random strings
+        const functionName = 'a';
+        const variableName1 = 'b';
+        const variableName2 = 'c';
+        const variableName3 = 'd';
+        const variableName4 = 'e';
+        const variableName5 = 'f';
+        const variableName6 = 'g';
+        const variableName7 = 'h';
+        const variableName8 = 'i';
+        const variableName9 = 'j';
+        const variableName10 = 'k';
+        const variableName11 = 'l';
+        const variableName12 = 'm';
+        const variableName13 = 'n';
+        const variableName14 = 'o';
+        const variableName15 = 'p';
+        const variableName16 = 'q';
+        const variableName17 = 'r';
+        const variableName18 = 's';
+        const variableName19 = 't';
+        const variableName20 = 'u';
+        const variableName21 = 'v';
+        const variableName22 = 'w';
+        const variableName23 = 'x';
+        const variableName24 = 'y';
+        const variableName25 = 'z';
+
+        // Replace the function and variable references with the obfuscated names
+        const obfuscatedCode = code
+            .replace(/simulateEKeyPress/g, functionName)
+            .replace(/handleKeyDown/g, variableName1)
+            .replace(/handleKeyUp/g, variableName2)
+            .replace(/spaceDown/g, variableName3)
+            .replace(/authorizedTokens/g, variableName4)
+            .replace(/isAuthorized/g, variableName5)
+            .replace(/eKeyDownEvent/g, variableName6)
+            .replace(/eKeyPressEvent/g, variableName7)
+            .replace(/eKeyUpEvent/g, variableName8)
+            .replace(/document/g, variableName9)
+            .replace(/KeyboardEvent/g, variableName10)
+            .replace(/key/g, variableName11)
+            .replace(/code/g, variableName12)
+            .replace(/bubbles/g, variableName13)
+            .replace(/setTimeout/g, variableName14)
+            .replace(/0\.1/g, variableName15)
+            .replace(/include/g, variableName16)
+            .replace(/match/g, variableName17)
+            .replace(/grant/g, variableName18)
+            .replace(/event/g, variableName19)
+            .replace(/tokens/g, variableName20)
+            .replace(/length/g, variableName21)
+            .replace(/return/g, variableName22)
+            .replace(/true/g, variableName23)
+            .replace(/false/g, variableName24)
+            .replace(/>/g, variableName25)
+            .replace(/</g, variableName25)
+            .replace(/\//g, variableName25)
+            .replace(/\|/g, variableName25)
+            .replace(/\*/g, variableName25)
+            .replace(/\+/g, variableName25)
+            .replace(/\-/g, variableName25)
+            .replace(/\=/g, variableName25)
+            .replace(/\{/g, variableName25)
+            .replace(/\}/g, variableName25)
+            .replace(/\[/g, variableName25)
+            .replace(/\]/g, variableName25)
+            .replace(/\(/g, variableName25)
+            .replace(/\)/g, variableName25)
+            .replace(/'kaprizz1'/g, variableName23)
+            .replace(/'kaprizz2'/g, variableName23)
+            .replace(/'kaprizz3'/g, variableName23)
+            .replace(/'kaprizz'/g, variableName24)
+            .replace(/'1'/g, variableName23)
+            .replace(/'2'/g, variableName23)
+            .replace(/'3'/g, variableName23)
+            .replace(/'undefined'/g, variableName24);
+
+        return obfuscatedCode;
+    }
+
+    // Define the function to prompt the user for a token
+    function promptForToken() {
+        const token = prompt('Please enter the token to activate the script');
+        if (token === null || token === '') {
+            return;
+        }
+        if (isAuthorized(token)) {
+            // Add the event listeners for the space bar key down and key up events
+            document.addEventListener('keydown', handleKeyDown);
+            document.addEventListener('keyup', handleKeyUp);
+        } else {
+            alert('Invalid token');
+            promptForToken();
+        }
+    }
+
+    // Define the function to simulate the 'E' key press and release
+    function simulateEKeyPress() {
+        const eKeyDownEvent = new KeyboardEvent('keydown', { key: 'e', code: 'KeyE', bubbles: true });
+        const eKeyPressEvent = new KeyboardEvent('keypress', { key: 'e', code: 'KeyE', bubbles: true });
+        const eKeyUpEvent = new KeyboardEvent('keyup', { key: 'e', code: 'KeyE', bubbles: true });
+
+        document.dispatchEvent(eKeyDownEvent);
+        document.dispatchEvent(eKeyPressEvent);
+        setTimeout(() => {
+            document.dispatchEvent(eKeyUpEvent);
+        }, 0);
+
+        if (spaceDown) {
+            setTimeout(simulateEKeyPress, 0.1);
+        }
+    }
+
+    // Define the function to handle the space bar key down and key up events
+    function handleKeyDown(event) {
+        if (event.code === 'Space') {
+            spaceDown = true;
+            simulateEKeyPress();
+        }
+    }
+
+    function handleKeyUp(event) {
+        if (event.code === 'Space') {
+            spaceDown = false;
+        }
+    }
+
+    // Check if the user is authorized
+    if (!isAuthorized('kaprizz1')) {
+        promptForToken();
+        return;
+    }
+
+    // Initialize the script
+    let spaceDown = false;
+
+    // Add the event listeners for the space bar key down and key up events
+    document.addEventListener('keydown', handleKeyDown);
+    document.addEventListener('keyup', handleKeyUp);
+})();
