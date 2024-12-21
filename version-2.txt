@@ -1,0 +1,153 @@
+// ==UserScript==
+// @name         v2 Dynast.io Atri_i with GUI Toggle
+// @namespace    http://violentmonkey.github.io/
+// @version      2
+// @description  i love Poliny + Simple GUI with buttons
+// @author       ds:atri_i
+// @match        *://dynast.io/*
+// @grant        none
+// @icon         https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvFMZr05hHdynfWeVD1grBPpXkjVZ_iAC9vg&s
+// ==/UserScript==
+
+(function() {
+    'use strict';
+
+    function addAnimatedText() {
+        const textElement = document.createElement('div');
+        textElement.innerText = 'Welcome to Dynast.io';
+        textElement.style.position = 'fixed';
+        textElement.style.top = '50px';
+        textElement.style.left = '50%';
+        textElement.style.transform = 'translateX(-50%)';
+        textElement.style.fontSize = '24px';
+        textElement.style.fontWeight = 'bold';
+        textElement.style.background = 'linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet)';
+        textElement.style.backgroundClip = 'text';
+        textElement.style.webkitBackgroundClip = 'text';
+        textElement.style.color = 'transparent';
+        textElement.style.animation = 'gradientShift 3s infinite';
+        textElement.style.zIndex = '10000';
+
+        const styleSheet = document.createElement('style');
+        styleSheet.type = 'text/css';
+        styleSheet.innerText = `
+            @keyframes gradientShift {
+                0% { background-position: 0% 50%; }
+                50% { background-position: 100% 50%; }
+                100% { background-position: 0% 50%; }
+            }
+        `;
+        document.head.appendChild(styleSheet);
+        document.body.appendChild(textElement);
+
+        setTimeout(() => {
+            textElement.remove();
+        }, 3000);
+    }
+
+    function simulateEKeyPress() {
+        const eKeyDownEvent = new KeyboardEvent('keydown', { key: 'e', code: 'KeyE', bubbles: true });
+        const eKeyPressEvent = new KeyboardEvent('keypress', { key: 'e', code: 'KeyE', bubbles: true });
+        const eKeyUpEvent = new KeyboardEvent('keyup', { key: 'e', code: 'KeyE', bubbles: true });
+
+        document.dispatchEvent(eKeyDownEvent);
+        document.dispatchEvent(eKeyPressEvent);
+        setTimeout(() => {
+            document.dispatchEvent(eKeyUpEvent);
+        }, 0);
+
+        if (spaceDown) {
+            setTimeout(simulateEKeyPress, 0.1);
+        }
+    }
+
+    function handleKeyDown(event) {
+        if (event.code === 'Space') {
+            spaceDown = true;
+            simulateEKeyPress();
+        }
+    }
+
+    function handleKeyUp(event) {
+        if (event.code === 'Space') {
+            spaceDown = false;
+        }
+    }
+
+    let spaceDown = false;
+    document.addEventListener('keydown', handleKeyDown);
+    document.addEventListener('keyup', handleKeyUp);
+
+    addAnimatedText();
+
+    const menuContainer = document.createElement('div');
+    menuContainer.style.position = 'fixed';
+    menuContainer.style.top = '20px';
+    menuContainer.style.left = '50%';
+    menuContainer.style.transform = 'translateX(-50%)';
+    menuContainer.style.fontSize = '20px';
+    menuContainer.style.fontWeight = 'bold';
+    menuContainer.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
+    menuContainer.style.color = 'white';
+    menuContainer.style.padding = '20px';
+    menuContainer.style.borderRadius = '10px';
+    menuContainer.style.boxShadow = '0 0 10px rgba(0, 0, 0, 0.5)';
+    menuContainer.style.zIndex = '10000';
+    menuContainer.style.display = 'none';
+    menuContainer.style.textAlign = 'center';
+
+    const textElementInMenu = document.createElement('div');
+    textElementInMenu.innerText = 'Тест пока что';
+    textElementInMenu.style.marginBottom = '15px';
+    menuContainer.appendChild(textElementInMenu);
+
+    const button1 = document.createElement('button');
+    button1.innerText = 'Кнопка 1';
+    button1.style.padding = '10px 20px';
+    button1.style.margin = '5px';
+    button1.style.borderRadius = '5px';
+    button1.style.backgroundColor = '#4CAF50';
+    button1.style.color = 'white';
+    button1.style.border = 'none';
+    button1.style.cursor = 'pointer';
+
+    const button2 = document.createElement('button');
+    button2.innerText = 'Кнопка 2';
+    button2.style.padding = '10px 20px';
+    button2.style.margin = '5px';
+    button2.style.borderRadius = '5px';
+    button2.style.backgroundColor = '#2196F3';
+    button2.style.color = 'white';
+    button2.style.border = 'none';
+    button2.style.cursor = 'pointer';
+
+    const button3 = document.createElement('button');
+    button3.innerText = 'Кнопка 3';
+    button3.style.padding = '10px 20px';
+    button3.style.margin = '5px';
+    button3.style.borderRadius = '5px';
+    button3.style.backgroundColor = '#f44336';
+    button3.style.color = 'white';
+    button3.style.border = 'none';
+    button3.style.cursor = 'pointer';
+
+    menuContainer.appendChild(button1);
+    menuContainer.appendChild(button2);
+    menuContainer.appendChild(button3);
+
+    document.body.appendChild(menuContainer);
+
+    function toggleMenu() {
+        if (menuContainer.style.display === 'none') {
+            menuContainer.style.display = 'block';
+        } else {
+            menuContainer.style.display = 'none';
+        }
+    }
+
+    document.addEventListener('keydown', function(event) {
+        if (event.key === 'F8') {
+            toggleMenu();
+        }
+    });
+})();
